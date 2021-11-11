@@ -1,11 +1,5 @@
-import sys,json,os,subprocess; 
+import sys,json,os; 
 sys.path.append("/home/alla/MoodleApiProject");
-#########################
-# This sigment of code still needs testing 
-def install(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-#########################
-
 ###############################
 # Loading Moodle API Library
 from Library.MoodleApi import MoodleApi; 
