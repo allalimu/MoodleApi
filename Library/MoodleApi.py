@@ -3,7 +3,7 @@ import json;
 class MoodleApi:
     """Token and other stuff"""
     moodlewsrestformat="json";
-    service="moodle_mobile_app";
+    service="a2la";
     wstoken=None;
     
     def __init__(self,url,username,password):
@@ -55,16 +55,35 @@ class MoodleApi:
                     "wstoken":self.wstoken,
                     "value":fn("value")
                 }
+            },
+            "Get_Users":{
+                "uri":"/webservice/rest/server.php",
+                "params":{
+                    "moodlewsrestformat":self.moodlewsrestformat,
+                    "wsfunction": "core_user_get_users",
+                    "wstoken":self.wstoken,
+                    "criteria[0][key]":"eamil",
+                    "criteria[0][value]":"%"
+                }
             }
         };
 
         return api_map[api_to_call];
 
-    def theRequest(self,url):
-        response=requests.request("GET", url);
+    def theRequest(self,url,r_type="GET",body=None):
+        response=requests.request(method=r_type,url=url,data=body);
         json_response=json.loads(response.text);
         return json_response;
 ###################################################################
+    def GetUsers(self):
+
+        request_map=self.getMap("Get_Users", lambda key: self.valuesToMap(key,{}));
+        url=self.build_url(request_map["uri"],request_map["params"]);
+
+        json_response=self.theRequest(url,r_type="POST");
+
+        return json_response;
+
     def GetCoursesBy(self,field,value):
         request_map=self.getMap("Get_Courses_by_field", lambda key: self.valuesToMap(key,{"field":field,"value":value}));
         url=self.build_url(request_map["uri"],request_map["params"]);
