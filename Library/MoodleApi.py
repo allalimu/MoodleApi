@@ -3,14 +3,14 @@ import json;
 class MoodleApi:
     """Token and other stuff"""
     moodlewsrestformat="json";
-    service="a2la";
+    service=None;
     wstoken=None;
     
-    def __init__(self,url,username,password):
-        self.wstoken=None;
+    def __init__(self,url,username,password,service):
         self.url=url;
         self.username=username;
         self.password=password;
+        self.service=service;
 
 ######################################################################
 

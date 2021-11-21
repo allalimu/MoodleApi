@@ -23,7 +23,7 @@ mapi.login();
 
 #json_result=mapi.GetCategories();
 json_result=mapi.GetCoursesBy("category",2);
-Path("../ApiCallsResults/Categories/2").mkdir(parents=True, exist_ok=True);
+os.Path("../ApiCallsResults/Categories/2").mkdir(parents=True, exist_ok=True);
 f = open("../ApiCallsResults/Categories/2/courses.json", "w");
 f.write(json.dumps(json_result));
 f.close();

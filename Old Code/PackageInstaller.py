@@ -1,6 +1,6 @@
 import os,sys;
 
-Packages=["click","requests","json","subprocess","dotenv"];
+Packages=["click","requests","json","subprocess","python-dotenv"];
 
 for pack in Packages:
     try:
