@@ -1,14 +1,10 @@
-import sys,json,os; 
-sys.path.append("/home/alla/MoodleApiProject");
-###############################
+import sys,json,os;
 # Loading Moodle API Library
-from Library.MoodleApi import MoodleApi; 
+from Project.Library.MoodleApi import MoodleApi; 
 ##############################
-
-#########################
-# This part still needs enhancing
 from dotenv import load_dotenv;
 load_dotenv();
+
 MY_ENV_URL = os.getenv('URL');
 MY_ENV_USERNAME = os.getenv('username');
 MY_ENV_PASSWORD = os.getenv('password');

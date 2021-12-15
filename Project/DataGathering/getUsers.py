@@ -1,24 +1,24 @@
 import sys,json,os;
-sys.path.append("/home/alla/MoodleApiProject");
-###############################
 # Loading Moodle API Library
-from Library.MoodleApi import MoodleApi; 
+from Project.Library.MoodleApi import MoodleApi; 
 ##############################
-
-#########################
-# This part still needs enhancing
 from dotenv import load_dotenv;
-load_dotenv();
-MY_ENV_URL = os.getenv('URL');
-MY_ENV_USERNAME = os.getenv('username');
-MY_ENV_PASSWORD = os.getenv('password');
-########################
 
-mapi= MoodleApi(MY_ENV_URL,MY_ENV_USERNAME,MY_ENV_PASSWORD);
-x=mapi.login();
-print(x);
-json_result=mapi.GetUsers();
+def getUsers():
+    load_dotenv();
+    MY_ENV_URL = os.getenv('URL');
+    MY_ENV_USERNAME = os.getenv('username');
+    MY_ENV_PASSWORD = os.getenv('password');
+    MY_ENV_SERVICE = os.getenv('service_name');
+    MY_ENV_PROJECTDIR = os.getenv('project_directory');
+    ########################
 
-f = open("ApiCallsResults/Users.json", "w");
-f.write(json.dumps(json_result));
-f.close();
+    mapi= MoodleApi(MY_ENV_URL,MY_ENV_USERNAME,MY_ENV_PASSWORD,MY_ENV_SERVICE);
+    
+    mapi.login();
+    
+    json_result=mapi.GetUsers();
+
+    f = open(MY_ENV_PROJECTDIR+"/ApiCallsResults/Users.json", "w");
+    f.write(json.dumps(json_result));
+    f.close();

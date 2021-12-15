@@ -6,7 +6,7 @@ setup(
     py_modules=['mainscript'],
     packages=find_packages(),
     install_requires=[
-        'click','python_dotenv','requests'
+        'click','python_dotenv','requests',"pandas"
     ],
     entry_points={
         'console_scripts': [

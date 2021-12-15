@@ -65,6 +65,15 @@ class MoodleApi:
                     "criteria[0][key]":"eamil",
                     "criteria[0][value]":"%"
                 }
+            },
+            "Get_PrivateFilesInformation_By_UserId":{
+                "uri":"/webservice/rest/server.php",
+                "params":{
+                    "moodlewsrestformat":self.moodlewsrestformat,
+                    "wsfunction": "core_user_get_private_files_info",
+                    "wstoken":self.wstoken,
+                    "userid":fn("userid")
+                }
             }
         };
 
@@ -74,7 +83,17 @@ class MoodleApi:
         response=requests.request(method=r_type,url=url,data=body);
         json_response=json.loads(response.text);
         return json_response;
+
 ###################################################################
+    
+    def GetPrivateFilesInfoByUserId(self,userid=0):
+        request_map=self.getMap("Get_PrivateFilesInformation_By_UserId", lambda key: self.valuesToMap(key,{"userid":userid}));
+        url=self.build_url(request_map["uri"],request_map["params"]);
+
+        json_response=self.theRequest(url);
+
+        return json_response;
+
     def GetUsers(self):
 
         request_map=self.getMap("Get_Users", lambda key: self.valuesToMap(key,{}));
@@ -108,4 +127,7 @@ class MoodleApi:
 
         if 'token' in json_response:
             self.wstoken=json_response['token'];
+        if self.wstoken is None:
+            raise Exception('Couldn\'t Get Token from Moodle');
+
         return self.wstoken;

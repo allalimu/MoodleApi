@@ -3,7 +3,15 @@
 #####################################
 packages={
     "Ex":{
-        "package":"examplescript",
+        "package":"Project.examplescript",
+        "function":"cli"
+    },
+    "OldUsers":{
+        "package":"Project.olduserscommand",
+        "function":"cli"
+    },
+    "PrivateFiles":{
+        "package":"Project.privatefilescommand",
         "function":"cli"
     }
 };
